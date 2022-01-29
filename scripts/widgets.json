@@ -1,0 +1,32 @@
+[
+    {
+        "_class" : "com.example.test.models.Widget",
+        "version" : 2,
+        "creationDate" : ISODate("2017-12-29T05:00:00.000Z"),
+        "lastModifiedDate" : null
+    },
+    {
+        "_class" : "com.example.test.models.Widget",
+        "version" : 2,
+        "creationDate" : ISODate("2018-12-29T05:00:00.000Z"),
+        "lastModifiedDate" : null
+    },
+    {
+        "_class" : "com.example.test.models.Widget",
+        "version" : 2,
+        "creationDate" : ISODate("2019-12-29T05:00:00.000Z"),
+        "lastModifiedDate" : null
+    },
+    {
+        "_class" : "com.example.test.models.Widget",
+        "version" : 2,
+        "creationDate" : ISODate("2020-12-29T05:00:00.000Z"),
+        "lastModifiedDate" : null
+    },
+    {
+        "_class" : "com.example.test.models.Widget",
+        "version" : 2,
+        "creationDate" : ISODate("2021-12-29T05:00:00.000Z"),
+        "lastModifiedDate" : ISODate("2021-12-30T05:00:00.000Z")
+    }
+]  
