@@ -39,13 +39,6 @@ public class BatchConfigurer extends DefaultBatchConfigurer {
     }
 
 
-    public PlatformTransactionManager getTransactionManager() {
-        final JdbcTransactionManager transactionManager = new JdbcTransactionManager();
-        transactionManager.setDataSource(batchDataSource);
-        return transactionManager;
-    }
-  
-
     @Bean
     @Override
     protected JobRepository createJobRepository() throws Exception {

@@ -28,6 +28,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
 
 
 @Configuration
@@ -55,6 +57,14 @@ public class GadgetImportConfig {
     @Autowired
     private GadgetImportLogRepository GadgetImportLogRepository;
 
+
+
+    @Bean
+    public PlatformTransactionManager platformTransactionManager() {
+        final JpaTransactionManager transactionManager = new JpaTransactionManager();
+        transactionManager.setDataSource(gadgetDataSource);
+        return transactionManager;
+    }
 
 
     @Bean
@@ -120,7 +130,9 @@ public class GadgetImportConfig {
 
     @Bean
     public Step ImportGadgetsToStaging() throws Exception {
-        return stepBuilderFactory.get("ImportGadgetsToStaging").<Widget, Gadget>chunk(2)
+        return stepBuilderFactory.get("ImportGadgetsToStaging")
+                .transactionManager(platformTransactionManager())
+                .<Widget, Gadget>chunk(2)
                 .reader(reader(null, null))
                 .processor(processor())
                 .writer(writer())
@@ -143,6 +155,7 @@ public class GadgetImportConfig {
     @Bean
     public Step LogResult() throws Exception {
         return stepBuilderFactory.get("LogResult")
+                .transactionManager(platformTransactionManager())
                 .tasklet(new GadgetImportResultTableInsert(GadgetImportLogRepository))
                 .build();
     }
